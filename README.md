@@ -12,15 +12,14 @@
       - [<span style='color:blue'> User <span>](#span-stylecolorblue-user-span)
       - [<span style='color:blue'> Report <span>](#span-stylecolorblue-report-span)
       - [<span style='color:blue'> Comment <span>](#span-stylecolorblue-comment-span)
-    - [Technologies](#technologies)
   - [Client](#client)
-  - [Description des query](#description-des-query)
+  - [Description des requêtes](#description-des-requêtes)
     - [Utilisateur](#utilisateur)
     - [Report](#report)
     - [Comment](#comment)
     - [General](#general)
   - [Schema global](#schema-global)
-    - [fonctionalite requis](#fonctionalite-requis)
+    - [Fonctionalités requis](#fonctionalités-requis)
 
 
 ## Sujet
@@ -88,21 +87,20 @@ services ou des ressources) et fonctionnalités associées à chacun des composa
 
 ### Les ressources
 #### <span style='color:blue'> User <span>
-    Pour permettre l’authentification des Trader et des Adviser dans le but de crée et/ou commenté du contenu, ainsi que la géstion du tableau de bord (liste des cryptos suivis).
+>Pour permettre l’authentification des Trader et des Adviser dans le but de crée et/ou commenté du contenu, ainsi que la géstion du tableau de bord (liste des cryptos suivis).
 
 #### <span style='color:blue'> Report <span>
-    Permet aux conseillers de publier leur pronostiques pour une certaine crypo-monnaie.
+>Permet aux conseillers de publier leur pronostiques pour une certaine crypo-monnaie.
 
 #### <span style='color:blue'> Comment <span>
-    Permet aux Traders de publier leur avis ou demander conseil concernant le rapport publié.
-
-### Technologies
-- [x] client : ReactJS
+>Permet aux Traders de publier leur avis ou demander conseil concernant le rapport publié.
 
 
 <!-- une description du client: plan du site (probablement une application monopage), contenu des
 écrans ; bien identifier à quels endroits apparaissent les appels aux différents composants du serveur, -->
 ## Client
+- [x] ReactJS
+
 1. le ***visitor*** arrive sur un **écran d’accueil** constituer d’une partie sur
 laquelle il peut cliquer affin que l'écran d’authentifiquation (ou d’inscription) apparait s’il le souhaite, un outil de recherhe et de filtrage, les données statistiques en temps réelles avec une pagination (10 par 10).
 
@@ -118,7 +116,7 @@ connecté, l'écran (modal) disparait, il reste donc sur le principal,
 
 <!-- une description des requêtes (requête HTTP) et réponses (contenu JSON de la
 réponse HTTP) entre le client et le serveur, -->
-## Description des query
+## Description des requêtes
 - HTTP - JSON
 
 ### Utilisateur
@@ -167,8 +165,7 @@ correspondant.
 - 
   
 
-### fonctionalite requis
-- [x] Venus
-- [x] (profils, commentaires, notes, messages, publications)
+### Fonctionalités requis
 - [x] generer par les utilisateurs
+- [x] (profils, commentaires, notes, messages, publications)
 

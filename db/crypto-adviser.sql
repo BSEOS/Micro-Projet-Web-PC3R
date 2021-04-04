@@ -3,7 +3,6 @@ CREATE TABLE `trader` (
   `username` varchar(255),
   `full_name` varchar(64),
   `password` varchar(255),
-  `adviser_id` int,
   `created_at` timestamp
 );
 
@@ -31,8 +30,18 @@ CREATE TABLE `report` (
   `created_at` timestamp
 );
 
-ALTER TABLE `trader` ADD FOREIGN KEY (`adviser_id`) REFERENCES `adviser` (`id`);
+CREATE TABLE `comment` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `trader_id` int,
+  `report_id` int,
+  `content` text,
+  `created_at` timestamp
+);
 
 ALTER TABLE `trader_cryptos` ADD FOREIGN KEY (`trader_id`) REFERENCES `trader` (`id`);
 
 ALTER TABLE `report` ADD FOREIGN KEY (`adviser_id`) REFERENCES `adviser` (`id`);
+
+ALTER TABLE `comment` ADD FOREIGN KEY (`trader_id`) REFERENCES `trader` (`id`);
+
+ALTER TABLE `comment` ADD FOREIGN KEY (`report_id`) REFERENCES `report` (`id`);

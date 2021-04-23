@@ -1,4 +1,4 @@
-package servlets;
+package wrappers;
 
 /** 
  * This example uses the Apache HTTPComponents library. 

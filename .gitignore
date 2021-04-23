@@ -10,6 +10,9 @@
 *.nar
 hs_err_pid*
 
+#dont ignore external libs
+!src/main/webapp/WEB-INF/lib/**
+
 ##############################
 ## Maven
 ##############################

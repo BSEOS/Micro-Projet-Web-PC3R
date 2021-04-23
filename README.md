@@ -102,7 +102,7 @@ services ou des ressources) et fonctionnalités associées à chacun des composa
 - [x] ReactJS
 
 1. le ***visitor*** arrive sur un **écran d’accueil** constituer d’une partie sur
-laquelle il peut cliquer affin que l'écran d’authentifiquation (ou d’inscription) apparait s’il le souhaite, un outil de recherhe et de filtrage, les données statistiques en temps réelles avec une pagination (10 par 10).
+laquelle il peut cliquer afin que l'écran d’authentification (ou d’inscription) apparaît s’il le souhaite, un outil de recherche et de filtrage, les données statistiques en temps réelles avec une pagination (10 par 10).
 
 2. L’utilisateur enregistré (***trader*** ou ***adviser***) peut choisir de
 s’authentifier sur **l'écran de connexion**, une fois

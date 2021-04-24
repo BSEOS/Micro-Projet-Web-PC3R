@@ -2,18 +2,19 @@ package wrappers.coinlore.test;
 
 import javax.naming.NameNotFoundException;
 
+import wrappers.coinlore.Coin;
 import wrappers.coinlore.CoinLoreWrapper;
 
 public class CoinLoreWrapperTest {
 	public static void main(String[] args) throws NameNotFoundException {
-		
+
 		CoinLoreWrapper clw = new CoinLoreWrapper();
-		int btcID = 90;
-		
-//		System.out.printf("BTC price:%s\n", clw.getCryptoPriceByID(btcID));
-//		System.out.println(clw.getGlobal());
-		
-//		System.out.println(clw.getTop10Coins());
-		System.out.println(clw.getCoinPriceByID(clw.getCoinID("btc")) + "$");
-	}	
+
+		int btcID = clw.getCoinIDbyName("bitcoin");
+		Coin coin = clw.getCoinByID(btcID);
+		Coin luna = clw.getCoinByID(clw.getCoinIDbyName("lun"));
+		System.out.println(coin.getMarketCapUSD());
+		System.out.println(luna.getPercentChange1h() + "  " + luna.getSymbol());
+		System.out.println(coin.getPriceUSD());
+	}
 }

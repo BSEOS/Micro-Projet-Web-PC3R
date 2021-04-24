@@ -6,25 +6,21 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.*;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.net.URIBuilder;
-import org.apache.tomcat.util.json.JSONParser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
+import wrappers.Wrapper;
+
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.naming.NameNotFoundException;
 
-public class CoinLoreWrapper {
+public class CoinLoreWrapper extends Wrapper {
 
 	public static HashMap<String, Integer> nameID = new HashMap<>();
 
@@ -85,7 +81,7 @@ public class CoinLoreWrapper {
 		return resp;
 	}
 
-	public int getCoinID(String coinName) throws NameNotFoundException {
+	public int getCoinIDbyName(String coinName) throws NameNotFoundException {
 		final String uri = "https://api.coinlore.net/api/tickers/";
 		int coinID = -1;
 		coinName = coinName.toLowerCase();
@@ -120,38 +116,24 @@ public class CoinLoreWrapper {
 		return coinID;
 	}
 
-	public JsonElement makeAPICall(final String uri) {
-		String resp = "";
-		JsonElement elem = null;
+	public Coin getCoinByID(final int coinID) {
+		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", coinID);
+		Coin coin = null;
+
 		try {
-			URIBuilder query = new URIBuilder(uri);
+			
+			JsonObject obj = (JsonObject) makeAPICall(uri).getAsJsonArray().get(0);
+			coin = new Coin(obj);
 
-			CloseableHttpClient client = HttpClients.createDefault();
-			HttpGet request = new HttpGet(query.build());
-
-			request.setHeader(HttpHeaders.ACCEPT, "application/json");
-
-			CloseableHttpResponse response = client.execute(request);
-
-			System.out.printf("status code: %d\n", response.getCode());
-
-			HttpEntity entity = response.getEntity();
-
-			resp = EntityUtils.toString(entity);
-			JsonParser jp = new JsonParser();
-			elem = jp.parse(resp);
-
-			response.close();
-
-		} catch (Exception e) {
+		} catch (java.lang.IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
 
-		return elem;
+		return coin;
 	}
 
-	public String getCoinPriceByID(int cryptoID) {
-		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", cryptoID);
+	public String getCoinPriceByID(int coinID) {
+		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", coinID);
 		final String priceKey = "price_usd";
 
 		String resp = "";
@@ -204,17 +186,13 @@ public class CoinLoreWrapper {
 
 			HttpEntity entity = response.getEntity();
 
-
 			response_content = EntityUtils.toString(entity);
 			JsonParser js = new JsonParser();
 			JsonElement je = js.parse(response_content);
 
 			System.out.println(je);
-			System.out.println(je.getAsJsonArray()
-					.get(0)
-					.getAsJsonObject()
-					.get("volume_ath"));
-	
+			System.out.println(je.getAsJsonArray().get(0).getAsJsonObject().get("volume_ath"));
+
 			response.close();
 
 		} catch (Exception e) {
@@ -223,6 +201,37 @@ public class CoinLoreWrapper {
 
 		return response_content;
 
+	}
+
+	@Override
+	public JsonElement makeAPICall(final String uri) {
+		String resp = "";
+		JsonElement elem = null;
+		try {
+			URIBuilder query = new URIBuilder(uri);
+
+			CloseableHttpClient client = HttpClients.createDefault();
+			HttpGet request = new HttpGet(query.build());
+
+			request.setHeader(HttpHeaders.ACCEPT, "application/json");
+
+			CloseableHttpResponse response = client.execute(request);
+
+			System.out.printf("status code: %d\n", response.getCode());
+
+			HttpEntity entity = response.getEntity();
+
+			resp = EntityUtils.toString(entity);
+			JsonParser jp = new JsonParser();
+			elem = jp.parse(resp);
+
+			response.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return elem;
 	}
 
 }

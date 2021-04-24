@@ -9,3 +9,13 @@ CREATE TABLE  bdd_sdzee.Utilisateur (
  PRIMARY KEY ( id ),
  UNIQUE ( email )
 ) ENGINE = INNODB;
+
+CREATE TABLE  bdd_crypto_adviser.Trader (
+	 id INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 username VARCHAR( 60 ) NOT NULL ,
+	 full_name VARCHAR( 60 ) NOT NULL ,
+	 password VARCHAR( 32 ) NOT NULL ,
+	 created_at DATETIME NOT NULL ,
+	 PRIMARY KEY ( id ),
+ 	 UNIQUE ( username )
+) ENGINE = INNODB;

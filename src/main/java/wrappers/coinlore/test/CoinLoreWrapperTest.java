@@ -16,5 +16,9 @@ public class CoinLoreWrapperTest {
 		System.out.println(coin.getMarketCapUSD());
 		System.out.println(luna.getPercentChange1h() + "  " + luna.getSymbol());
 		System.out.println(coin.getPriceUSD());
+
+		// or directy get coin by its name
+
+		System.out.println("ETH: " + clw.getCoinByName("eth").getPriceUSD() + "$");
 	}
 }

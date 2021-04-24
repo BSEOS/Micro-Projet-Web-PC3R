@@ -116,12 +116,16 @@ public class CoinLoreWrapper extends Wrapper {
 		return coinID;
 	}
 
+	public Coin getCoinByName(String coinName) throws NameNotFoundException {
+		return getCoinByID(getCoinIDbyName(coinName));
+	}
+
 	public Coin getCoinByID(final int coinID) {
 		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", coinID);
 		Coin coin = null;
 
 		try {
-			
+
 			JsonObject obj = (JsonObject) makeAPICall(uri).getAsJsonArray().get(0);
 			coin = new Coin(obj);
 

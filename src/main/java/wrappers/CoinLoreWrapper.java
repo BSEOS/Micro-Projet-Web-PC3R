@@ -22,13 +22,73 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class CoinWrapper {
+public class CoinLoreWrapper {
 
-	private static String apiKey = "key";
+	private static final String apiKey = "key";
+	
+	public static HashMap<String, Integer> nameID = new HashMap<>();
+	
+	{
+		nameID.put("bitcoin", 90);
+		nameID.put("ethereum", 80);
+		nameID.put("binance-coin", 2710);
+		nameID.put("binance coin", 2710);
+		nameID.put("ripple", 58);
+		nameID.put("dogecoin", 2);
+		nameID.put("cardano", 257);
+		nameID.put("polkadot", 45219);
+		nameID.put("litecoin", 1);
+		nameID.put("bitcoin-cash", 2321);
+		nameID.put("bitcoin cash", 2321);
+		nameID.put("chainlink", 2751);
+		nameID.put("vechain", 2741);
+		nameID.put("stellar", 89);
+		nameID.put("uniswap", 47305);
+	}
 
-	public static String getCryptoPriceByID(int cryptoID) {
+	public CoinLoreWrapper() {
+
+	}
+	
+	public String getTop10Coins() {
+		return getTopCoins(0,10);
+	}
+
+	public String getTopCoins(int start, int limit) {
+		final String uri = String.format(
+				"https://api.coinlore.net/api/tickers/?start=%d&limit=%d", start, limit);
+		final String priceKey = "price_usd";
+
+		String resp = "";
+
+		try {
+			URIBuilder query = new URIBuilder(uri);
+
+			CloseableHttpClient client = HttpClients.createDefault();
+			HttpGet request = new HttpGet(query.build());
+
+			request.setHeader(HttpHeaders.ACCEPT, "application/json");
+
+			CloseableHttpResponse response = client.execute(request);
+
+			System.out.printf("status code: %d\n", response.getCode());
+
+			HttpEntity entity = response.getEntity();
+			resp = EntityUtils.toString(entity);
+			
+			response.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return resp;
+	}
+
+	public String getCryptoPriceByID(int cryptoID) {
 		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", cryptoID);
 		final String priceKey = "price_usd";
 
@@ -65,7 +125,7 @@ public class CoinWrapper {
 		return price;
 	}
 
-	public static String getGlobal() {
+	public String getGlobal() {
 		String uri = "https://api.coinlore.net/api/global/";
 		String response_content = "";
 
@@ -113,13 +173,7 @@ public class CoinWrapper {
 
 	}
 
-	public static void main(String[] args) {
-		int btcID = 90;
-		System.out.printf("BTC price:%s\n", getCryptoPriceByID(btcID));
-//		System.out.println(getGlobal());
-	}
-
-	public static void testCoinMarket() {
+	public void testCoinMarket() {
 		String uri = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
 		List<NameValuePair> paratmers = new ArrayList<NameValuePair>();
 		paratmers.add(new BasicNameValuePair("start", "1"));

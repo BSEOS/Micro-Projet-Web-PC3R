@@ -1,8 +1,8 @@
-package wrappers.test;
+package wrappers.coinlore.test;
 
 import javax.naming.NameNotFoundException;
 
-import wrappers.CoinLoreWrapper;
+import wrappers.coinlore.CoinLoreWrapper;
 
 public class CoinLoreWrapperTest {
 	public static void main(String[] args) throws NameNotFoundException {
@@ -14,6 +14,6 @@ public class CoinLoreWrapperTest {
 //		System.out.println(clw.getGlobal());
 		
 //		System.out.println(clw.getTop10Coins());
-		System.out.println(clw.getCoinPriceByID(clw.getCoinID("avax")));
+		System.out.println(clw.getCoinPriceByID(clw.getCoinID("btc")) + "$");
 	}	
 }

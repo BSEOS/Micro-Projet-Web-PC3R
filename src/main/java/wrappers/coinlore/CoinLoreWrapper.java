@@ -1,8 +1,4 @@
-package wrappers;
-
-/** 
- * This example uses the Apache HTTPComponents library. 
- */
+package wrappers.coinlore;
 
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -118,7 +114,7 @@ public class CoinLoreWrapper {
 		}
 
 		if (coinID == -1) {
-			throw new NameNotFoundException("doesn't find the name in the list of actual ctrypto-currencies");
+			throw new NameNotFoundException("can't find the name in the list of actual ctrypto-currencies");
 		}
 
 		return coinID;
@@ -179,8 +175,7 @@ public class CoinLoreWrapper {
 			JsonParser jp = new JsonParser();
 			JsonElement je = jp.parse(resp);
 
-//			System.out.println(je);
-			price = je.getAsJsonArray().get(0).getAsJsonObject().get(priceKey).toString();
+			price = je.getAsJsonArray().get(0).getAsJsonObject().get(priceKey).getAsString();
 
 			response.close();
 
@@ -209,26 +204,17 @@ public class CoinLoreWrapper {
 
 			HttpEntity entity = response.getEntity();
 
-//			final List<NameValuePair> l = EntityUtils.parse(entity);
-//			System.out.println(l.get(0));
+
 			response_content = EntityUtils.toString(entity);
-//			EntityUtils.consume(entity);
 			JsonParser js = new JsonParser();
 			JsonElement je = js.parse(response_content);
 
 			System.out.println(je);
-			System.out.println(je.getAsJsonArray().get(0).getAsJsonObject().get("volume_ath"));
-
-//	        String pageName = jsonObject.getAsJsonObject("pageInfo").get("pageName").getAsString();
-//	        String pageName = jsonObject.get("coins_count").getAsString();
-//	        System.out.println(pageName);
-
-//	        JsonArray arr = jsonObject.getAsJsonArray("posts");
-//	        for (int i = 0; i < arr.size(); i++) {
-//	            String post_id = arr.get(i).getAsJsonObject().get("post_id").getAsString();
-//	            System.out.println(post_id);
-//	        }
-//			
+			System.out.println(je.getAsJsonArray()
+					.get(0)
+					.getAsJsonObject()
+					.get("volume_ath"));
+	
 			response.close();
 
 		} catch (Exception e) {

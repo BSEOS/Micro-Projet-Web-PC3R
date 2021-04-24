@@ -1,13 +1,13 @@
 create database bdd_crypto_adviser;
 
-CREATE TABLE  bdd_sdzee.Utilisateur (
- id INT( 11 ) NOT NULL AUTO_INCREMENT ,
- email VARCHAR( 60 ) NOT NULL ,
- mot_de_passe VARCHAR( 32 ) NOT NULL ,
- nom VARCHAR( 20 ) NOT NULL ,
- date_inscription DATETIME NOT NULL ,
- PRIMARY KEY ( id ),
- UNIQUE ( email )
+CREATE TABLE  bdd_crypto_adviser.Adviser (
+	 id INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 username VARCHAR( 60 ) NOT NULL ,
+	 full_name VARCHAR( 60 ) NOT NULL ,
+	 password VARCHAR( 32 ) NOT NULL ,
+	 created_at DATETIME NOT NULL ,
+	 PRIMARY KEY ( id ),
+ 	 UNIQUE ( username )
 ) ENGINE = INNODB;
 
 CREATE TABLE  bdd_crypto_adviser.Trader (
@@ -18,4 +18,14 @@ CREATE TABLE  bdd_crypto_adviser.Trader (
 	 created_at DATETIME NOT NULL ,
 	 PRIMARY KEY ( id ),
  	 UNIQUE ( username )
+) ENGINE = INNODB;
+
+CREATE TABLE  bdd_crypto_adviser.Report (
+	 id_report INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 idviser_id INT( 11 ) NOT NULL,
+	 crypto_id INT( 11 ) NOT NULL,
+	 title VARCHAR( 60 ) NOT NULL ,
+	 content TEXT NOT NULL ,
+	 created_at DATETIME NOT NULL ,
+	 PRIMARY KEY ( id_report )
 ) ENGINE = INNODB;

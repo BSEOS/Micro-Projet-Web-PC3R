@@ -38,3 +38,14 @@ CREATE TABLE  bdd_crypto_adviser.Crypto (
 	 PRIMARY KEY ( Crypto_id )
 ) ENGINE = INNODB;
 
+CREATE TABLE  bdd_crypto_adviser.Comment (
+	 comment_id INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 username VARCHAR( 60 ) NOT NULL ,
+	 report_id INT( 11 ) NOT NULL ,
+	 content TEXT NOT NULL,
+	 created_at DATETIME NOT NULL ,
+	 PRIMARY KEY ( comment_id )
+) ENGINE = INNODB;
+
+
+

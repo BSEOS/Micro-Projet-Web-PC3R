@@ -23,14 +23,16 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.naming.NameNotFoundException;
 
 public class CoinLoreWrapper {
 
-	private static final String apiKey = "key";
-	
 	public static HashMap<String, Integer> nameID = new HashMap<>();
-	
+
+	// caching some coins data
 	{
 		nameID.put("bitcoin", 90);
 		nameID.put("ethereum", 80);
@@ -52,14 +54,13 @@ public class CoinLoreWrapper {
 	public CoinLoreWrapper() {
 
 	}
-	
+
 	public String getTop10Coins() {
-		return getTopCoins(0,10);
+		return getTopCoins(0, 10);
 	}
 
 	public String getTopCoins(int start, int limit) {
-		final String uri = String.format(
-				"https://api.coinlore.net/api/tickers/?start=%d&limit=%d", start, limit);
+		final String uri = String.format("https://api.coinlore.net/api/tickers/?start=%d&limit=%d", start, limit);
 		final String priceKey = "price_usd";
 
 		String resp = "";
@@ -78,7 +79,7 @@ public class CoinLoreWrapper {
 
 			HttpEntity entity = response.getEntity();
 			resp = EntityUtils.toString(entity);
-			
+
 			response.close();
 
 		} catch (Exception e) {
@@ -88,7 +89,72 @@ public class CoinLoreWrapper {
 		return resp;
 	}
 
-	public String getCryptoPriceByID(int cryptoID) {
+	public int getCoinID(String coinName) throws NameNotFoundException {
+		final String uri = "https://api.coinlore.net/api/tickers/";
+		int coinID = -1;
+		coinName = coinName.toLowerCase();
+
+		if (nameID.containsKey(coinName)) {
+			coinID = nameID.get(coinName);
+		} else {
+			JsonElement elem = makeAPICall(uri);
+			JsonArray data = elem.getAsJsonObject().get("data").getAsJsonArray();
+			Iterator<JsonElement> it = data.iterator();
+			while (it.hasNext()) {
+				JsonObject obj = (JsonObject) it.next();
+				String symbol = obj.get("symbol").getAsString().toLowerCase();
+				String name = obj.get("name").getAsString().toLowerCase();
+				String nameid = obj.get("nameid").getAsString().toLowerCase();
+				if (name.contains(coinName) || nameid.contains(coinName) || symbol.contains(coinName)) {
+					int id = obj.get("id").getAsInt();
+					coinID = id;
+					nameID.put(name, id);
+					nameID.put(nameid, id);
+					nameID.put(symbol, id);
+				}
+
+			}
+
+		}
+
+		if (coinID == -1) {
+			throw new NameNotFoundException("doesn't find the name in the list of actual ctrypto-currencies");
+		}
+
+		return coinID;
+	}
+
+	public JsonElement makeAPICall(final String uri) {
+		String resp = "";
+		JsonElement elem = null;
+		try {
+			URIBuilder query = new URIBuilder(uri);
+
+			CloseableHttpClient client = HttpClients.createDefault();
+			HttpGet request = new HttpGet(query.build());
+
+			request.setHeader(HttpHeaders.ACCEPT, "application/json");
+
+			CloseableHttpResponse response = client.execute(request);
+
+			System.out.printf("status code: %d\n", response.getCode());
+
+			HttpEntity entity = response.getEntity();
+
+			resp = EntityUtils.toString(entity);
+			JsonParser jp = new JsonParser();
+			elem = jp.parse(resp);
+
+			response.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return elem;
+	}
+
+	public String getCoinPriceByID(int cryptoID) {
 		final String uri = String.format("https://api.coinlore.net/api/ticker/?id=%d", cryptoID);
 		final String priceKey = "price_usd";
 
@@ -171,52 +237,6 @@ public class CoinLoreWrapper {
 
 		return response_content;
 
-	}
-
-	public void testCoinMarket() {
-		String uri = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
-		List<NameValuePair> paratmers = new ArrayList<NameValuePair>();
-		paratmers.add(new BasicNameValuePair("start", "1"));
-		paratmers.add(new BasicNameValuePair("limit", "1"));
-		paratmers.add(new BasicNameValuePair("convert", "USD"));
-
-		try {
-			String result = makeAPICall(uri, paratmers);
-			System.out.println(result);
-		} catch (IOException e) {
-			System.out.println("Error: cannont access content - " + e.toString());
-		} catch (URISyntaxException e) {
-			System.out.println("Error: Invalid URL " + e.toString());
-		}
-	}
-
-	public static String makeAPICall(String uri, List<NameValuePair> parameters)
-			throws URISyntaxException, IOException {
-		String response_content = "";
-
-		URIBuilder query = new URIBuilder(uri);
-		query.addParameters(parameters);
-
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet request = new HttpGet(query.build());
-
-		request.setHeader(HttpHeaders.ACCEPT, "application/json");
-		request.addHeader("X-CMC_PRO_API_KEY", apiKey);
-
-		CloseableHttpResponse response = client.execute(request);
-
-		try {
-			System.out.println(response.getCode());
-			HttpEntity entity = response.getEntity();
-			response_content = EntityUtils.toString(entity);
-			EntityUtils.consume(entity);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} finally {
-			response.close();
-		}
-
-		return response_content;
 	}
 
 }

@@ -21,8 +21,8 @@ CREATE TABLE  bdd_crypto_adviser.Trader (
 ) ENGINE = INNODB;
 
 CREATE TABLE  bdd_crypto_adviser.Report (
-	 id_report INT( 11 ) NOT NULL AUTO_INCREMENT ,
-	 idviser_id INT( 11 ) NOT NULL,
+	 id INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 adviser_id INT( 11 ) NOT NULL,
 	 crypto_id INT( 11 ) NOT NULL,
 	 title VARCHAR( 60 ) NOT NULL ,
 	 content TEXT NOT NULL ,
@@ -31,7 +31,7 @@ CREATE TABLE  bdd_crypto_adviser.Report (
 ) ENGINE = INNODB;
 
 CREATE TABLE  bdd_crypto_adviser.Crypto (
-	 Crypto_id INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 id INT( 11 ) NOT NULL AUTO_INCREMENT ,
 	 Name VARCHAR( 60 ) NOT NULL ,
 	 price DECIMAL( 11 ) NOT NULL,
 	 last_update DATETIME NOT NULL ,

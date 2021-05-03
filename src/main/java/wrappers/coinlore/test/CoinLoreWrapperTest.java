@@ -10,15 +10,15 @@ public class CoinLoreWrapperTest {
 
 		CoinLoreWrapper clw = new CoinLoreWrapper();
 
-		int btcID = clw.getCoinIDbyName("bitcoin");
-		Coin coin = clw.getCoinByID(btcID);
-		Coin luna = clw.getCoinByID(clw.getCoinIDbyName("lun"));
-		System.out.println(coin.getMarketCapUSD());
-		System.out.println(luna.getPercentChange1h() + "  " + luna.getSymbol());
-		System.out.println(coin.getPriceUSD());
+//		int btcID = clw.getCoinIDbyName("bitcoin");
+//		Coin coin = clw.getCoinByID(btcID);
+//		Coin luna = clw.getCoinByID(clw.getCoinIDbyName("lun"));
+//		System.out.println(coin.getMarketCapUSD());
+//		System.out.println(luna.getPercentChange1h() + "  " + luna.getSymbol());
+//		System.out.println(coin.getPriceUSD());
 
 		// or directy get coin by its name
 
-		System.out.println("ETH: " + clw.getCoinByName("eth").getPriceUSD() + "$");
+		System.out.println("ETH: " + clw.getCoinByName("litec").getRank() + "$");
 	}
 }

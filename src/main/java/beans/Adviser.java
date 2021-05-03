@@ -6,9 +6,9 @@ public class Adviser implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String username;
-    private String full_name;
-    private String password;
-    private String created_at;
+	private String full_name;
+	private String password;
+	private String created_at;
 
 	public int getId() {
 		return id;

@@ -8,16 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/reports")
-public class ReportAccess extends HttpServlet{
+@WebServlet("/cryptos")
+public class CryptoAccess extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+								throws ServletException, IOException {
 
 		final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
 		final String DB_URL="jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
@@ -27,7 +27,7 @@ public class ReportAccess extends HttpServlet{
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String title = "Reports Result";
+		String title = "Cryptos Result";
 		out.println("<html>\n" +
 				"<head><title>" + title + "</title></head>\n" +
 				"<body bgcolor=\"#f0f0f0\">\n" +
@@ -39,21 +39,17 @@ public class ReportAccess extends HttpServlet{
 
 			Statement stmt = conn.createStatement();
 			String sql;
-			sql = "SELECT * FROM report";
+			sql = "SELECT * FROM crypto";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next()){
-				int id_report  = rs.getInt("id_report");
-				int idviser_id  = rs.getInt("idviser_id");
-				int crypto_id  = rs.getInt("crypto_id");
-				String title1 = rs.getString("title");
-				String content = rs.getString("content");
+				int id  = rs.getInt("Crypto_id");
+				String name = rs.getString("name");
+				//String price = Double.toString(rs.getBigDecimal("full_name").doubleValue());
 
-				out.println("Id : " + id_report);
-				out.println(", id adviser: " + idviser_id);
-				out.println(", id crypto : " + crypto_id);
-				out.println(", title : " + title1);
-				out.println(", content : " + content+"<br>");
+				out.println("Id : " + id);
+				out.println(", name: " + name);
+				//out.println(", price : " + price+"<br>");
 			}
 			out.println("</body></html>");
 

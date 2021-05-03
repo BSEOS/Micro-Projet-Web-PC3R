@@ -13,42 +13,42 @@ import beans.Adviser;
 import beans.Report;
 import dao.ReportDao;
 
-@WebServlet("/creatReport")
+@WebServlet("/create-report")
 public class ReportServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private ReportDao reportDao;
-    
-    public void init() {
-    	reportDao = new ReportDao();
-    }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-    		throws ServletException, IOException{
-    	response.getWriter().append("Served at: ").append(request.getContextPath());
-    	
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/creatReport.jsp");
-    	dispatcher.forward(request, response);
-    }
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
+	private ReportDao reportDao;
 
-        String idviser_id = request.getParameter("idviser_id");
-        String crypto_id = request.getParameter("crypto_id");
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
+	public void init() {
+		reportDao = new ReportDao();
+	}
 
-        Report report = new Report();
-        report.setId_report(Integer.parseInt(idviser_id));
-        report.setCrypto_id(Integer.parseInt(crypto_id));
-        report.setTitle(title);
-        report.setContent(content);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-        try {
-            reportDao.creatReport(report);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        response.sendRedirect("reportdetails.jsp");
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/creatReport.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String idviser_id = request.getParameter("idviser_id");
+		String crypto_id = request.getParameter("crypto_id");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
+		Report report = new Report();
+		report.setId_report(Integer.parseInt(idviser_id));
+		report.setCrypto_id(Integer.parseInt(crypto_id));
+		report.setTitle(title);
+		report.setContent(content);
+
+		try {
+			reportDao.creatReport(report);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("reportdetails.jsp");
+	}
 }

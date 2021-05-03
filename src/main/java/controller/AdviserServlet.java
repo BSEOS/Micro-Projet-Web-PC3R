@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import beans.Adviser;
 import dao.AdviserDao;
 
-@WebServlet("/registerAdviser")
+@WebServlet("/register-adviser")
 public class AdviserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdviserDao adviserDao;

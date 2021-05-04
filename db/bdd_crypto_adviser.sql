@@ -27,7 +27,7 @@ CREATE TABLE  bdd_crypto_adviser.Report (
 	 title VARCHAR( 60 ) NOT NULL ,
 	 content TEXT NOT NULL ,
 	 created_at DATETIME NOT NULL ,
-	 PRIMARY KEY ( id_report )
+	 PRIMARY KEY ( id )
 ) ENGINE = INNODB;
 
 CREATE TABLE  bdd_crypto_adviser.Crypto (
@@ -35,7 +35,7 @@ CREATE TABLE  bdd_crypto_adviser.Crypto (
 	 Name VARCHAR( 60 ) NOT NULL ,
 	 price DECIMAL( 11 ) NOT NULL,
 	 last_update DATETIME NOT NULL ,
-	 PRIMARY KEY ( Crypto_id )
+	 PRIMARY KEY ( id )
 ) ENGINE = INNODB;
 
 CREATE TABLE  bdd_crypto_adviser.Comment (

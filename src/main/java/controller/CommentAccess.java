@@ -21,8 +21,9 @@ public class CommentAccess extends HttpServlet {
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 
-		final String USER = "root";
-		final String PASS = "";
+		final String[] auth = Utils.getSQLAuth();
+		final String USER = auth[0];
+		final String PASS = auth[1];
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();

@@ -103,6 +103,7 @@ public class CoinLoreWrapper extends Wrapper {
 					nameID.put(name, id);
 					nameID.put(nameid, id);
 					nameID.put(symbol, id);
+					break;
 				}
 
 			}

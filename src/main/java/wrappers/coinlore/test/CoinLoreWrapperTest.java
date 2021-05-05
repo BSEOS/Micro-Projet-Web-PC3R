@@ -19,6 +19,6 @@ public class CoinLoreWrapperTest {
 
 		// or directy get coin by its name
 
-		System.out.println("ETH: " + clw.getCoinByName("litec").getRank() + "$");
+		System.out.println("ETH: " + clw.getCoinByName("telcoin").getPriceUSD() + "$");
 	}
 }

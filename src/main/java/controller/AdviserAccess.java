@@ -21,8 +21,9 @@ public class AdviserAccess extends HttpServlet {
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 
-		final String USER = "root";
-		final String PASS = "";
+		final String[] auth = Utils.getSQLAuth();
+		final String USER = auth[0];
+		final String PASS = auth[1];
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -31,12 +32,11 @@ public class AdviserAccess extends HttpServlet {
 				+ "<h1 align=\"center\">" + title + "</h1>\n");
 		try {
 			Class.forName(JDBC_DRIVER);
-
 			Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 			Statement stmt = conn.createStatement();
 			String sql;
-			sql = "SELECT * FROM adviser";
+			sql = "SELECT * FROM Adviser";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

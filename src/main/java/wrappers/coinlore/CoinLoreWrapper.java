@@ -8,10 +8,7 @@ import org.apache.hc.core5.http.*;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.net.URIBuilder;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import wrappers.Wrapper;
 
@@ -53,30 +50,9 @@ public class CoinLoreWrapper extends Wrapper {
 
 	public String getTopCoins(int start, int limit) {
 		final String uri = String.format("https://api.coinlore.net/api/tickers/?start=%d&limit=%d", start, limit);
-		final String priceKey = "price_usd";
+		JsonElement elem = makeAPICall(uri);
 
-		String resp = "";
-
-		try {
-			URIBuilder query = new URIBuilder(uri);
-
-			CloseableHttpClient client = HttpClients.createDefault();
-			HttpGet request = new HttpGet(query.build());
-
-			request.setHeader(HttpHeaders.ACCEPT, "application/json");
-
-			CloseableHttpResponse response = client.execute(request);
-
-			System.out.printf("status code: %d\n", response.getCode());
-
-			HttpEntity entity = response.getEntity();
-			resp = EntityUtils.toString(entity);
-
-			response.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String resp = elem.toString();
 
 		return resp;
 	}
@@ -173,38 +149,12 @@ public class CoinLoreWrapper extends Wrapper {
 		return price;
 	}
 
-	public String getGlobal() {
+	public JsonElement getGlobal() {
 		String uri = "https://api.coinlore.net/api/global/";
 		String response_content = "";
+		JsonElement elem = makeAPICall(uri);
 
-		try {
-			URIBuilder query = new URIBuilder(uri);
-
-			CloseableHttpClient client = HttpClients.createDefault();
-			HttpGet request = new HttpGet(query.build());
-
-			request.setHeader(HttpHeaders.ACCEPT, "application/json");
-
-			CloseableHttpResponse response = client.execute(request);
-
-			System.out.println(response.getCode());
-
-			HttpEntity entity = response.getEntity();
-
-			response_content = EntityUtils.toString(entity);
-			JsonParser js = new JsonParser();
-			JsonElement je = js.parse(response_content);
-
-			System.out.println(je);
-			System.out.println(je.getAsJsonArray().get(0).getAsJsonObject().get("volume_ath"));
-
-			response.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return response_content;
+		return elem;
 
 	}
 

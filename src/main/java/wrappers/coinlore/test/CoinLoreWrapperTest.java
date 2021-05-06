@@ -18,6 +18,8 @@ public class CoinLoreWrapperTest {
 //		System.out.println(coin.getPriceUSD());
 
 		// or directy get coin by its name
+		
+//		System.out.println(clw.getTop10Coins());
 
 		System.out.println("ETH: " + clw.getCoinByName("telcoin").getPriceUSD() + "$");
 	}

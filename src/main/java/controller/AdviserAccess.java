@@ -43,10 +43,12 @@ public class AdviserAccess extends HttpServlet {
 				int id = rs.getInt("id");
 				String username = rs.getString("username");
 				String full_name = rs.getString("full_name");
-
+				String date = rs.getString("created_at");
+				
 				out.println("Id : " + id);
 				out.println(", Username: " + username);
 				out.println(", Full name : " + full_name + "<br>");
+				out.println(", Date : " + date + "<br>");
 			}
 			out.println("</body></html>");
 

@@ -31,11 +31,15 @@ public class AdviserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String username = request.getParameter("username");
 		String full_name = request.getParameter("full_name");
 		String password = request.getParameter("password");
-
+		String passwordConfirm = request.getParameter("password-confirm");
+		if(!password.equals(passwordConfirm)) {
+			//TODO
+			//Return error
+		}
+		
 		Adviser adviser = new Adviser();
 		adviser.setUsername(username);
 		adviser.setFull_name(full_name);
@@ -43,9 +47,11 @@ public class AdviserServlet extends HttpServlet {
 
 		try {
 			adviserDao.registerAdviser(adviser);
+			response.sendRedirect("adviserdetails.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
+			//TODO SHOULD Redirect to error page
 		}
-		response.sendRedirect("adviserdetails.jsp");
+		
 	}
 }

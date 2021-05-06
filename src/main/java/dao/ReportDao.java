@@ -6,10 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import beans.Report;
+import controller.Utils;
 
 public class ReportDao {
     public int creatReport(Report report) throws ClassNotFoundException {
-        String INSERT_REPORT_SQL = "INSERT INTO report" +
+		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+		final String[] auth = Utils.getSQLAuth();
+		final String USER = auth[0];
+		final String PASS = auth[1];
+        String INSERT_REPORT_SQL = "INSERT INTO Report" +
             "  (idviser_id, crypto_id, title, content, created_at) VALUES " +
             " (?, ?, ?, ?, NOW());";
 
@@ -18,7 +23,7 @@ public class ReportDao {
         Class.forName("com.mysql.jdbc.Driver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true", "root", "");
+            .getConnection(DB_URL, USER, PASS);
 
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_REPORT_SQL)) {
             preparedStatement.setInt(1, report.getIdviser_id());

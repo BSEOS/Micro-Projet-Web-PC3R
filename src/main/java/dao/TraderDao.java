@@ -6,12 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import beans.Trader;
+import controller.Utils;
 
 
 public class TraderDao {
     
 	public int registerTrader(Trader trader) throws ClassNotFoundException {
-        String INSERT_TRADER_SQL = "INSERT INTO trader" +
+		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+		final String[] auth = Utils.getSQLAuth();
+		final String USER = auth[0];
+		final String PASS = auth[1];
+		
+        String INSERT_TRADER_SQL = "INSERT INTO Trader" +
             "  (username, full_name, password, created_at) VALUES " +
             " (?, ?, ?, NOW());";
 
@@ -20,7 +26,7 @@ public class TraderDao {
         Class.forName("com.mysql.jdbc.Driver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true", "root", "");
+            .getConnection(DB_URL, USER, PASS);
 
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TRADER_SQL)) {
             preparedStatement.setString(1, trader.getUsername());

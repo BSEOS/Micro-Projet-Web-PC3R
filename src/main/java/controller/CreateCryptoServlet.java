@@ -14,7 +14,7 @@ import beans.Crypto;
 import dao.CryptoDao;
 
 @WebServlet("/create-crypto")
-public class CryptoServlet extends HttpServlet {
+public class CreateCryptoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CryptoDao cryptoDao;
 

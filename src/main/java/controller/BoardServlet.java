@@ -15,32 +15,42 @@ import wrappers.coinlore.CoinLoreWrapper;
 /**
  * Servlet implementation class BoardServlet
  */
-@WebServlet("/board")
-//@WebServlet(description = "Main Board of crypto-currencies", urlPatterns = { "/board" })
+@WebServlet(description = "Main Board of crypto-currencies", urlPatterns = { "/board" })
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	public BoardServlet() {
-//		super();
-//		
-//	}
-
+	/*
+	 * @return list of cryptos with rank in [s,..,e]
+	 * 			if params not contains s&e returns top10 cryptos
+	 * 
+	 * 
+	 * http://localhost:8080/crypto-adviser/board
+	 * return top10 cryptos
+	 * 
+	 * http://localhost:8080/crypto-adviser/board?s=10&e=22
+	 * returns crypos with the ranks between 10 and 22 inclusive
+	 * 
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CoinLoreWrapper clw = new CoinLoreWrapper();
-		JsonElement elem = clw.getGlobal();
+		String res = "";
+		String s = request.getParameter("s");
+		String e = request.getParameter("e");
+		if (s == null && e == null) {
+			res = clw.getTop10Coins();
+		} else {
+			int start = s == null ? 1 : Integer.parseInt(s);
+			int end = e == null ? 1 : Integer.parseInt(e);
+
+			res = clw.getTopCoins(start - 1, end - start + 1);
+		}
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		out.print(elem.toString());
+		out.print(res);
 		out.flush();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

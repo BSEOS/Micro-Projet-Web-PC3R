@@ -31,7 +31,7 @@ public class TraderServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		String username = request.getParameter("username");
 		String full_name = request.getParameter("full_name");
 		String password = request.getParameter("password");

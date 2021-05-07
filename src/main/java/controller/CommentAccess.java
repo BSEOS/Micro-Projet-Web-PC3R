@@ -8,58 +8,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import beans.Comment;
+import beans.Report;
+import dao.CommentDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/comments")
+@WebServlet("/comment")
 public class CommentAccess extends HttpServlet {
+	private CommentDao commentDao;
+
+	public void init() {
+		commentDao = new CommentDao();
+	}
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+		String commentID = request.getParameter("id");
+		if (commentID == null || commentID.isEmpty() || commentID.isBlank()) {
+			// TODO
+		}
 
-		final String[] auth = Utils.getSQLAuth();
-		final String USER = auth[0];
-		final String PASS = auth[1];
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String title = "Reports Result";
-		out.println("<html>\n" + "<head><title>" + title + "</title></head>\n" + "<body bgcolor=\"#f0f0f0\">\n"
-				+ "<h1 align=\"center\">" + title + "</h1>\n");
 		try {
-			Class.forName(JDBC_DRIVER);
+			int id = Integer.parseInt(commentID);
 
-			Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			Statement stmt = conn.createStatement();
-			String sql;
-			sql = "SELECT * FROM comment";
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				int comment_id = rs.getInt("comment_id");
-				String username = rs.getString("username");
-				int report_id = rs.getInt("report_id");
-				String content = rs.getString("content");
-
-				out.println("Id Comment: " + comment_id);
-				out.println(", UserName: " + username);
-				out.println(", Id Report : " + report_id);
-				out.println(", content : " + content + "<br>");
+			Comment comment = commentDao.getComment(id);
+			if (comment == null) {
+				// TODO error
+			} else {
+				String res = comment.getJson();
+				PrintWriter out = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				out.print(res);
+				out.flush();
 			}
-			out.println("</body></html>");
-
-			rs.close();
-			stmt.close();
-			conn.close();
-		} catch (SQLException se) {
-			se.printStackTrace();
 		} catch (Exception e) {
+			// TODO error
 			e.printStackTrace();
 		}
+
 	}
 }

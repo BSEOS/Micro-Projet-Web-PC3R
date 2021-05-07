@@ -27,7 +27,7 @@ public class ReportAccess extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reportID = request.getParameter("id");
 		if (reportID == null || reportID.isEmpty() || reportID.isBlank()) {
-			// TODO
+			// TODO error
 		}
 
 		try {
@@ -45,7 +45,8 @@ public class ReportAccess extends HttpServlet {
 				out.flush();
 			}
 		} catch (Exception e) {
-
+			
+			//TODO Error
 			e.printStackTrace();
 		}
 

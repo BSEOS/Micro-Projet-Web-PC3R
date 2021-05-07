@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.google.gson.Gson;
 
-public class Report implements Serializable {
+public class Report extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int adviserID;
@@ -12,10 +12,6 @@ public class Report implements Serializable {
 	private String title;
 	private String content;
 	private String created_at;
-
-	public String getJson() {
-		return new Gson().toJson(this).toString();
-	}
 
 	public int getId() {
 		return id;

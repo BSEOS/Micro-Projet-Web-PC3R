@@ -2,45 +2,47 @@ package beans;
 
 import java.io.Serializable;
 
-public class Comment implements Serializable {
+public class Comment extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int commentID;
 	private String username;
 	private int reportID;
-    private String content;
-    private String createdAt;
-    
-	public int getComment_id() {
-		return commentID;
-	}
-	public void setComment_id(int comment_id) {
-		this.commentID = comment_id;
-	}
+	private String content;
+	private String createdAt;
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getReport_id() {
+
+	public int getReportID() {
 		return reportID;
 	}
-	public void setReport_id(int report_id) {
-		this.reportID = report_id;
+
+	public void setReportID(int reportID) {
+		this.reportID = reportID;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCreated_at() {
+
+	public String getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreated_at(String created_at) {
-		this.createdAt = created_at;
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 }

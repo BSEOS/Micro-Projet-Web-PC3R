@@ -39,11 +39,11 @@ public class commentServlet extends HttpServlet {
 
 		Comment comment = new Comment();
 		comment.setUsername(username);
-		comment.setReport_id(Integer.parseInt(report_id));
+		comment.setReportID(Integer.parseInt(report_id));
 		comment.setContent(content);
 
 		try {
-			commentDao.creatComment(comment);
+			commentDao.createComment(comment);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import com.google.gson.Gson;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -24,25 +27,34 @@ public class ReportServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String reportID = request.getParameter("id");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/creatReport.jsp");
-		dispatcher.forward(request, response);
+		try {
+			int id = Integer.parseInt(reportID);
+
+			Report report = reportDao.getReport(id);
+			String res = report.getJson();
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			out.print(res);
+			out.flush();
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/creatReport.jsp");
+//		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String idviser_id = request.getParameter("idviser_id");
-		String crypto_id = request.getParameter("crypto_id");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String reportID = request.getParameter("id");
 
 		Report report = new Report();
-		report.setId_report(Integer.parseInt(idviser_id));
-		report.setCrypto_id(Integer.parseInt(crypto_id));
-		report.setTitle(title);
-		report.setContent(content);
+		report.setId(Integer.parseInt(reportID));
 
 		try {
 			reportDao.creatReport(report);

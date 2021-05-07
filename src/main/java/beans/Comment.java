@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int comment_id;
+	private int commentID;
 	private String username;
-	private int report_id;
+	private int reportID;
     private String content;
-    private String created_at;
+    private String createdAt;
     
 	public int getComment_id() {
-		return comment_id;
+		return commentID;
 	}
 	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+		this.commentID = comment_id;
 	}
 	public String getUsername() {
 		return username;
@@ -23,10 +23,10 @@ public class Comment implements Serializable {
 		this.username = username;
 	}
 	public int getReport_id() {
-		return report_id;
+		return reportID;
 	}
 	public void setReport_id(int report_id) {
-		this.report_id = report_id;
+		this.reportID = report_id;
 	}
 	public String getContent() {
 		return content;
@@ -35,10 +35,10 @@ public class Comment implements Serializable {
 		this.content = content;
 	}
 	public String getCreated_at() {
-		return created_at;
+		return createdAt;
 	}
 	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+		this.createdAt = created_at;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -49,6 +49,7 @@ public class LoginUserServlet extends HttpServlet {
 				//TODO Error
 			}
 			
+			System.out.println(resUser);
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

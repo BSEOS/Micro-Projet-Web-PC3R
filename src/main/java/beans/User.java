@@ -2,14 +2,13 @@ package beans;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int id;
 	protected String username;
 	protected String full_name;
 	protected String password;
 	protected String created_at;
-	
 
 	public int getId() {
 		return id;
@@ -49,6 +48,12 @@ public class User implements Serializable{
 
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("{id: %d\nusername: %s\nfull_name: %s\npassword:%s\ncreated_at: %s\n}", id, username,
+				full_name, password, created_at);
 	}
 
 }

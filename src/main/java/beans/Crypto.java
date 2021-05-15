@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class Crypto implements Serializable {
+public class Crypto extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int Crypto_id;
 	private String Name;

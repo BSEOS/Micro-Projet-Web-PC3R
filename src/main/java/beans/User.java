@@ -2,21 +2,12 @@ package beans;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	protected int id;
 	protected String username;
 	protected String full_name;
 	protected String password;
 	protected String created_at;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;

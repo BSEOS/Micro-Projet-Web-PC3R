@@ -6,16 +6,12 @@ import com.google.gson.Gson;
 
 public class Report extends Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int id;
+
 	private int adviserID;
 	private int cryptoID;
 	private String title;
 	private String content;
 	private String created_at;
-
-	public int getId() {
-		return id;
-	}
 
 	public void setId(int id) {
 		this.id = id;

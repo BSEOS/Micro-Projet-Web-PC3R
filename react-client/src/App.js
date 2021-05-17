@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import HomeScreen from "./screens/HomeScreen";
+import CoinDetailScreen from './screens/CoinDetailScreen';
+import CoinSummaryScreen from './screens/CoinSummaryScreen';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Router>
+			<div className="App">
+				<Switch>
+					<Route exact path='/' component={HomeScreen} />
+					<Route path="/login" component={LoginScreen} />
+					<Route path="/register" component={RegisterScreen} />
+					<Route path="/coins/:id/summary/:summaryID" component={CoinSummaryScreen} />
+					<Route path="/coins/:id" component={CoinDetailScreen} />
+				</Switch>
+
+			</div>
+		</Router>
+	);
 }
 
 export default App;

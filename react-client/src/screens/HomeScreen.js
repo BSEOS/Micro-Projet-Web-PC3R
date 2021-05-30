@@ -13,11 +13,10 @@ class HomeScreen extends Component {
             loading: true,
             items: [],
         }
-        // console.log('this.props.history', this.props.history)
     }
 
     fetchData() {
-        alert("called")
+        // alert("called")
         this.setState({
             loading: true
         })
@@ -31,9 +30,7 @@ class HomeScreen extends Component {
                         items: result.data
                     });
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
+
                 (error) => {
                     this.setState({
                         loading: false,
@@ -44,10 +41,9 @@ class HomeScreen extends Component {
     }
 
     componentDidMount() {
-        setInterval(this.fetchData(), 3000)
+        setInterval(async () => await this.fetchData(), 10000)
 
-        // this.isDesktop = helpers.isDesktop()
-        // console.log('this.isDesktop', this.isDesktop)
+
 
     }
 

@@ -40,6 +40,42 @@ public class ReportDao {
 		}
 		return result;
 	}
+	
+	public Report getReportByCryptoId(int id) throws ClassNotFoundException {
+		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+		final String[] auth = Utils.getSQLAuth();
+		final String USER = auth[0];
+		final String PASS = auth[1];
+
+		String SELECT_QUERY = String.format("SELECT * FROM Report WHERE crypto_id = \"%d\"", id);
+
+		Report resReport = null;
+		ResultSet rs = null;
+
+		Class.forName("com.mysql.jdbc.Driver");
+
+		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
+			System.out.println(preparedStatement);
+
+			rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				resReport = new Report();
+				resReport.setId(rs.getInt("id"));
+				resReport.setContent(rs.getString("content"));
+				resReport.setTitle(rs.getString("title"));
+				resReport.setCryptoID(rs.getInt("crypto_id"));
+				resReport.setAdviserID(rs.getInt("adviser_id"));
+				resReport.setCreated_at(rs.getString("created_at"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return resReport;
+	}
 
 	public Report getReport(int id) throws ClassNotFoundException {
 		final String DB_URL = "jdbc:mysql://localhost:3306/bdd_crypto_adviser?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";

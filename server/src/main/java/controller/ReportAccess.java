@@ -33,7 +33,7 @@ public class ReportAccess extends HttpServlet {
 		try {
 			int id = Integer.parseInt(reportID);
 
-			Report report = reportDao.getReport(id);
+			Report report = reportDao.getReportByCryptoId(id);
 			if (report == null) {
 				// TODO
 			} else {

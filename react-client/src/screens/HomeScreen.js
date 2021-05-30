@@ -93,7 +93,7 @@ class HomeScreen extends Component {
                                                         Coin
                                                     </th>
                                                     <th>Price</th>
-                                                    <th>Market</th>
+                                                    <th>Market Cap</th>
                                                     <th>24h volume</th>
                                                     <th>1h</th>
                                                     <th>24h</th>
@@ -111,7 +111,7 @@ class HomeScreen extends Component {
                                                                 </Link>
                                                             </td>
                                                             <td>
-                                                                    {item.price_usd + " $"}
+                                                                {item.price_usd + " $"}
                                                             </td>
                                                             <td>
                                                                 {item.market_cap_usd + " $"}

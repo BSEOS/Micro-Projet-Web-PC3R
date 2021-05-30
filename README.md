@@ -21,6 +21,8 @@
   - [Schema global](#schema-global)
     - [Fonctionalités requis](#fonctionalités-requis)
 
+\
+![live-board](./media/live_board.png)
 
 ## Sujet
 **Crypto-Adviser**\
@@ -76,7 +78,7 @@ elle choisi de publier un pronostique sur `ETH`, l'application lui affiche un fo
 <!-- un liste des données qui seront stockées dans la base de données du serveur, leur composition,
 éventuellement des schémas de tables. -->
 ## Base de données
-![DB](./db/crypto-adviser-dp.png)
+![DB](./server/db/crypto-adviser-dp.png)
 
 
 <!-- une description du serveur: choix de l’approche (Service ou Ressources), composition (liste des

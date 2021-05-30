@@ -24,6 +24,7 @@
 \
 ![live-board](./media/live_board.png)
 ![global-screen](./media/global_screen.png)
+![report-screen](./media/report_screen.png)
 
 ## Sujet
 **Crypto-Adviser**\
@@ -102,6 +103,8 @@ services ou des ressources) et fonctionnalités associées à chacun des composa
 <!-- une description du client: plan du site (probablement une application monopage), contenu des
 écrans ; bien identifier à quels endroits apparaissent les appels aux différents composants du serveur, -->
 ## Client
+[Client Installation](./react-client/README.md)
+
 - [x] ReactJS
 
 1. le ***visitor*** arrive sur un **écran d’accueil** constituer d’une partie sur

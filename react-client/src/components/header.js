@@ -29,19 +29,19 @@ class Header extends Component {
     }
 
     _userTooltip(props) {
-        return <Tooltip {...props}>پروفایل</Tooltip>;
+        return <Tooltip {...props}>profile</Tooltip>;
     }
     _starredTooltip(props) {
-        return <Tooltip {...props}>ستاره‌دارها</Tooltip>;
+        return <Tooltip {...props}>faves</Tooltip>;
     }
     _addPostTooltip(props) {
-        return <Tooltip {...props}>افزودن پست</Tooltip>;
+        return <Tooltip {...props}>add post</Tooltip>;
     }
     _exploreTooltip(props) {
-        return <Tooltip {...props}>جستجوی فروشندگان</Tooltip>;
+        return <Tooltip {...props}>search</Tooltip>;
     }
     _homeTooltip(props) {
-        return <Tooltip {...props}>خانه</Tooltip>;
+        return <Tooltip {...props}>home</Tooltip>;
     }
 
     render() {

@@ -20,15 +20,14 @@ public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * @return list of cryptos with rank in [s,..,e]
-	 * 			if params not contains s&e returns top10 cryptos
+	 * @return list of cryptos with rank in [s,..,e] if params not contains s&e
+	 * returns top10 cryptos
 	 * 
 	 * 
-	 * http://localhost:8080/crypto-adviser/board
-	 * return top10 cryptos
+	 * http://localhost:8080/crypto-adviser/board return top10 cryptos
 	 * 
-	 * http://localhost:8080/crypto-adviser/board?s=10&e=22
-	 * returns crypos with the ranks between 10 and 22 inclusive
+	 * http://localhost:8080/crypto-adviser/board?s=10&e=22 returns crypos with the
+	 * ranks between 10 and 22 inclusive
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,6 +48,7 @@ public class BoardServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
+
 		out.print(res);
 		out.flush();
 	}

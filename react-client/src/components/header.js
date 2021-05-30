@@ -53,6 +53,7 @@ class Header extends Component {
                     <Navbar.Collapse className="justify-content-between ">
                         <Nav className="mr-auto">
                             <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/global">Global</Nav.Link>
                             <Nav.Link href="#link">Link</Nav.Link>
 
                         </Nav>

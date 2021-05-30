@@ -23,6 +23,7 @@
 
 \
 ![live-board](./media/live_board.png)
+![global-screen](./media/global_screen.png)
 
 ## Sujet
 **Crypto-Adviser**\

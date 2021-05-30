@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
+import GlobalScreen from './screens/GlobalScreen';
 import CoinDetailScreen from './screens/CoinDetailScreen';
 import CoinSummaryScreen from './screens/CoinSummaryScreen';
 
@@ -12,6 +13,7 @@ function App() {
 			<div className="App">
 				<Switch>
 					<Route exact path='/' component={HomeScreen} />
+					<Route path='/global' component={GlobalScreen} />
 					<Route path="/login" component={LoginScreen} />
 					<Route path="/register" component={RegisterScreen} />
 					<Route path="/coins/:id/summary/:summaryID" component={CoinSummaryScreen} />

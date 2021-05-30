@@ -48,11 +48,11 @@ class Header extends Component {
         return (
             <header>
                 <Navbar bg="light" expand="lg" className="px-3">
-                    <Navbar.Brand href="#home">Crypto Adviser</Navbar.Brand>
+                    <Navbar.Brand href="/">Crypto Adviser</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-between ">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
+                            <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="#link">Link</Nav.Link>
 
                         </Nav>

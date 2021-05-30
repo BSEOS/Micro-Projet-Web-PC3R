@@ -43,8 +43,6 @@ class HomeScreen extends Component {
     componentDidMount() {
         setInterval(async () => await this.fetchData(), 10000)
 
-
-
     }
 
 
